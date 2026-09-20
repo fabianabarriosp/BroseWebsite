@@ -33,9 +33,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
-h1 {
-  font-size: clamp(70px, 15vw, 220px);
-  letter-spacing: -0.08em;
+.broselogo {
+  width: 250px;
+  height: auto;
+  padding-bottom: 20px;
 }
 
 p {
