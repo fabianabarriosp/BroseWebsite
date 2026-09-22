@@ -1,3 +1,6 @@
+/* =================
+   TEST ANIMATION 
+==================== */
 const canvas = document.getElementById("fluidCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -84,3 +87,19 @@ window.addEventListener("mousemove", (event) => {
 });
 
 animate();
+
+/* =========================
+   WINE CARD INTERACTION
+========================= */
+
+const wineCards = document.querySelectorAll(".wine-card");
+
+wineCards.forEach((card) => {
+  card.addEventListener("mouseenter", () => {
+    wineCards.forEach((otherCard) => {
+      otherCard.classList.remove("active");
+    });
+
+    card.classList.add("active");
+  });
+});

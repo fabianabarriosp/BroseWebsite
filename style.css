@@ -7,8 +7,9 @@
 html,
 body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: #b3150d;
 }
 
@@ -17,6 +18,8 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .content {
@@ -41,4 +44,285 @@ body {
 
 p {
   letter-spacing: 0.25em;
+}
+
+/* =========================
+   WINE INFORMATION CARDS
+========================= */
+.wine-info {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 54px);
+  height: 320px;
+  margin: 80px auto;
+  display: flex;
+  gap: 14px;
+  overflow: hidden;
+}
+
+/* =========================
+   CARD
+========================= */
+.wine-card {
+  position: relative;
+  height: 100%;
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    flex 0.7s cubic-bezier(0.77, 0, 0.175, 1),
+    transform 0.4s ease;
+  padding: 30px;
+}
+
+/* THE OPEN CARD */
+.wine-card.active {
+  flex: 3;
+}
+
+/* =========================
+   CARD COLOURS
+========================= */
+.wine-card:not(.dark):not(.cream) {
+  background: #e8140b;
+}
+
+.wine-card.dark {
+  background: #292929;
+}
+
+.wine-card.cream {
+  background: #ebe7da;
+}
+
+/* =========================
+   TEXT
+========================= */
+.card-content {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 26px;
+  z-index: 2;
+}
+
+.card-content h2 {
+  margin: 0 0 18px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 400;
+  font-style: italic;
+  transition: font-size 0.4s ease;
+}
+
+.card-content p {
+  max-width: 440px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0;
+  transition:
+    opacity 0.4s ease 0.15s,
+    transform 0.5s ease;
+  transform: translateY(10px);
+}
+
+/* SHOW TEXT WHEN OPEN */
+.wine-card.active .card-content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   TEXT COLOURS
+========================= */
+.wine-card:not(.dark):not(.cream) .card-content {
+  color: #050505;
+}
+
+.wine-card.dark .card-content {
+  color: #f4f1e9;
+}
+
+.wine-card.cream .card-content {
+  color: #55534d;
+}
+
+/* =========================
+   ICONS
+========================= */
+.card-icon {
+  position: absolute;
+  z-index: 1;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    scale 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Grapes */
+.grapes {
+  width: 130px;
+  height: 130px;
+  top: 20px;
+  right: 30px;
+  transform: rotate(0deg);
+}
+
+/* Circles */
+.circles {
+  width: 100px;
+  height: 100px;
+  top: 35px;
+  right: 35px;
+  transform: rotate(0deg);
+}
+
+/* Star */
+.star {
+  top: 25px;
+  right: 30px;
+  font-size: 120px;
+  color: #aaa79d;
+  line-height: 1;
+  transform: rotate(15deg);
+}
+
+/* =========================
+   GRAPE ICON
+========================= */
+.grapes {
+  width: 130px;
+  height: 130px;
+  top: 20px;
+  right: 30px;
+}
+
+.grapes span {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d90000, #8e0000);
+  box-shadow:
+    inset -10px -10px 20px rgba(0, 0, 0, 0.12),
+    inset 8px 8px 15px rgba(255, 255, 255, 0.04);
+}
+
+.grapes span:nth-child(1) {
+  top: 0;
+  left: 30px;
+}
+
+.grapes span:nth-child(2) {
+  top: 45px;
+  left: 0;
+}
+
+.grapes span:nth-child(3) {
+  top: 45px;
+  right: 0;
+}
+
+.grapes span:nth-child(4) {
+  bottom: 0;
+  left: 30px;
+}
+
+/* =========================
+   CIRCLES ICON
+========================= */
+
+.circles {
+  width: 100px;
+  height: 100px;
+  top: 35px;
+  right: 35px;
+}
+
+.circles span {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #999, #555);
+}
+
+.circles span:nth-child(1) {
+  top: 0;
+  left: 35px;
+}
+
+.circles span:nth-child(2) {
+  top: 25px;
+  left: 5px;
+}
+
+.circles span:nth-child(3) {
+  top: 25px;
+  right: 5px;
+}
+
+.circles span:nth-child(4) {
+  bottom: 5px;
+  left: 18px;
+}
+
+.circles span:nth-child(5) {
+  bottom: 5px;
+  right: 18px;
+}
+
+/* =========================
+   STAR
+========================= */
+.star {
+  top: 25px;
+  right: 30px;
+  font-size: 120px;
+  color: #aaa79d;
+  line-height: 1;
+  transform: rotate(15deg);
+}
+
+/* =========================
+   HOVER
+========================= */
+.wine-card:hover {
+  transform: translateY(-2px);
+}
+.wine-card:hover .grapes {
+  transform: rotate(10deg) scale(1.05);
+}
+
+.wine-card:hover .circles {
+  transform: rotate(-10deg) scale(1.05);
+}
+
+.wine-card:hover .star {
+  transform: rotate(25deg) scale(1.05);
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 700px) {
+  .wine-info {
+    height: auto;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .wine-card,
+  .wine-card.active {
+    flex: none;
+    height: 220px;
+    width: 100%;
+  }
+
+  .wine-card.active {
+    height: 320px;
+  }
 }
