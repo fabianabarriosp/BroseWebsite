@@ -275,13 +275,13 @@ p {
   right: 18px;
 }
 
-/* =========================
+/* ===================
    STAR
 ========================= */
 .star {
   top: 25px;
   right: 30px;
-  font-size: 120px;
+  font-size: 121px;
   color: #aaa79d;
   line-height: 1;
   transform: rotate(15deg);
