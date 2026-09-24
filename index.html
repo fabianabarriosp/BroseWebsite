@@ -2,73 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BROSÉ — Fluid</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spinning 3D logo</title>
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"
+    ></script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #b3150d;
+      }
+      model-viewer {
+        width: min(80vw, 520px);
+        height: min(80vw, 520px);
+      }
+    </style>
   </head>
-
   <body>
-    <!--TEST!!!-->
-    <canvas id="fluidCanvas"></canvas>
-    <div class="content">
-      <img src="assets/broselogo.png" class="broselogo" alt="brose logo" />
-      <p>The modern knight choses what he likes.</p>
-    </div>
-
-    <!--WINE SECTION-->
-    <section class="wine-info">
-      <div class="wine-card active">
-        <div class="card-icon grapes">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-        <div class="card-content">
-          <h2>What's in<br />the bottle?</h2>
-
-          <p>
-            Dry rosé made from Grenache, Tempranillo and Syrah. Expect bright
-            strawberry, red cherry and citrus notes with a crisp, clean finish.
-          </p>
-        </div>
-      </div>
-
-      <div class="wine-card dark">
-        <div class="card-icon circles">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-        <div class="card-content">
-          <h2>From grape<br />to glass</h2>
-
-          <p>
-            Red grapes are gently pressed and kept briefly with their skins to
-            create BROSÉ's signature pale-pink colour. The juice is then
-            cool-fermented to keep it fresh, fruity and crisp.
-          </p>
-        </div>
-      </div>
-
-      <div class="wine-card cream">
-        <div class="card-icon star">✦</div>
-
-        <div class="card-content">
-          <h2>Pairs well<br />with...</h2>
-
-          <p>
-            Perfect with grilled meats, pizza, seafood, spicy food and
-            charcuterie. Serve chilled and let the food do the talking.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <script src="script.js"></script>
+    <model-viewer
+      src="logo.glb"
+      alt="Spinning 3D logo"
+      auto-rotate
+      auto-rotate-delay="0"
+      rotation-per-second="30deg"
+      interaction-prompt="none"
+      camera-orbit="0deg 75deg auto"
+      environment-image="neutral"
+      shadow-intensity="1"
+      shadow-softness="0.6"
+    >
+    </model-viewer>
+    <script>
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelector("model-viewer").removeAttribute("auto-rotate");
+      }
+    </script>
   </body>
 </html>
