@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pour.css">
 <style>
   :root{
     --mx: 50%;
@@ -15,10 +16,9 @@
   }
   *{box-sizing:border-box;}
   html,body{
-    height:100%;
     margin:0;
     background:var(--bg);
-    overflow:hidden;
+    overflow-x:hidden;
     font-family:'Cormorant', serif;
     -webkit-font-smoothing:antialiased;
   }
@@ -192,6 +192,27 @@
     <div class="intro-cover" id="introCover"></div>
   </div>
 
+  <!-- scroll-driven pour: pinned for ~350vh, everything drawn on one canvas -->
+  <section class="pour" id="pour" aria-label="A glass of Brosé being poured">
+    <div class="pour__stage">
+      <canvas class="pour__canvas" aria-hidden="true"></canvas>
+      <div class="pour__grain" aria-hidden="true"></div>
+      <div class="pour__copy pour__copy--intro">
+        <p class="pour__kicker">Chapter I &nbsp;&middot;&nbsp; The Pour</p>
+      </div>
+      <div class="pour__copy pour__copy--outro">
+        <h2 class="pour__title">Brosé</h2>
+        <p class="pour__kicker">the new ritual, poured slowly.</p>
+      </div>
+      <div class="pour__hint" aria-hidden="true">scroll<i></i></div>
+    </div>
+  </section>
+
+  <section class="after" id="story">
+    <img src="assets/broselogo.png" alt="Brosé">
+    <p>Rosé, made for the table and the tale.</p>
+  </section>
+
 <script>
   const stage = document.getElementById('stage');
   function setPos(x, y){
@@ -224,5 +245,8 @@
     idle();
   }, 2000);
 </script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="pour.js"></script>
 </body>
 </html>
