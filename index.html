@@ -69,7 +69,7 @@
     <div class="stage">
       <model-viewer
         id="logo"
-        src="fall.glb"
+        src="Fall.glb"
         animation-name="Fall"
         alt="Spinning 3D logo"
         auto-rotate
@@ -92,28 +92,40 @@
         logo.removeAttribute("auto-rotate");
       }
 
-      /*the sword falls when you click the logo */
+      /* the sword falls when you click the logo */
       const clank = new Audio("clank.mp3");
+      const clink = new Audio("clank.mp3");
+      clink.volume = 0.4;
+
       const landingTime = 1.6; // seconds until the sword hits the ground
       const bounceTime = 2.0; // seconds until the small bounce
       let hasFallen = false;
+
+      // unlocks a sound during the click, so the browser allows it later
+      function unlock(sound) {
+        sound.muted = true;
+        sound.play().then(() => {
+          sound.pause();
+          sound.currentTime = 0;
+          sound.muted = false;
+        });
+      }
 
       logo.addEventListener("click", () => {
         if (hasFallen) return; // the sword can only fall once
         hasFallen = true;
 
+        unlock(clank);
+        unlock(clink);
+
         logo.play({ repetitions: 1 }); // play the Blender animation once
 
-        // loud clank when it hits the ground
         setTimeout(() => {
-          clank.play();
+          clank.play(); // loud clank when it hits the ground
         }, landingTime * 1000);
 
-        // quieter clink when it bounces
         setTimeout(() => {
-          const clink = new Audio("clank.mp3");
-          clink.volume = 0.4;
-          clink.play();
+          clink.play(); // quieter clink when it bounces
         }, bounceTime * 1000);
       });
     </script>
