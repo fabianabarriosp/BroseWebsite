@@ -23,6 +23,7 @@
       model-viewer {
         width: min(80vw, 520px);
         height: min(80vw, 520px);
+        cursor: pointer;
       }
       .shadow {
         width: min(40vw, 260px);
@@ -51,12 +52,25 @@
           animation: none;
         }
       }
+      .sound-hint {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: #ffffff;
+        opacity: 0.6;
+        letter-spacing: 1px;
+        margin: 0;
+      }
     </style>
   </head>
   <body>
     <div class="stage">
       <model-viewer
-        src="logo.glb"
+        id="logo"
+        src="fall.glb"
+        animation-name="Fall"
         alt="Spinning 3D logo"
         auto-rotate
         auto-rotate-delay="0"
@@ -67,12 +81,41 @@
         shadow-intensity="0"
       >
       </model-viewer>
+      <p class="sound-hint">🔊 Sound on, then click the logo</p>
       <div class="shadow"></div>
     </div>
+
     <script>
+      const logo = document.querySelector("#logo");
+
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        document.querySelector("model-viewer").removeAttribute("auto-rotate");
+        logo.removeAttribute("auto-rotate");
       }
+
+      /*the sword falls when you click the logo */
+      const clank = new Audio("clank.mp3");
+      const landingTime = 1.6; // seconds until the sword hits the ground
+      const bounceTime = 2.0; // seconds until the small bounce
+      let hasFallen = false;
+
+      logo.addEventListener("click", () => {
+        if (hasFallen) return; // the sword can only fall once
+        hasFallen = true;
+
+        logo.play({ repetitions: 1 }); // play the Blender animation once
+
+        // loud clank when it hits the ground
+        setTimeout(() => {
+          clank.play();
+        }, landingTime * 1000);
+
+        // quieter clink when it bounces
+        setTimeout(() => {
+          const clink = new Audio("clank.mp3");
+          clink.volume = 0.4;
+          clink.play();
+        }, bounceTime * 1000);
+      });
     </script>
   </body>
 </html>
