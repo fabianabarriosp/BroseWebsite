@@ -16,26 +16,59 @@
         place-items: center;
         background: #b3150d;
       }
+      .stage {
+        display: grid;
+        place-items: center;
+      }
       model-viewer {
         width: min(80vw, 520px);
         height: min(80vw, 520px);
       }
+      .shadow {
+        width: min(40vw, 260px);
+        height: 24px;
+        margin-top: -60px;
+        border-radius: 50%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(0, 0, 0, 0.35) 0%,
+          rgba(0, 0, 0, 0) 70%
+        );
+        animation: coin 6s ease-in-out infinite;
+      }
+      /* shadow gets narrow when the coin is sideways, wide when it faces you */
+      @keyframes coin {
+        0%,
+        100% {
+          transform: scaleX(1);
+        }
+        50% {
+          transform: scaleX(0.25);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .shadow {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body>
-    <model-viewer
-      src="logo.glb"
-      alt="Spinning 3D logo"
-      auto-rotate
-      auto-rotate-delay="0"
-      rotation-per-second="30deg"
-      interaction-prompt="none"
-      camera-orbit="0deg 75deg auto"
-      environment-image="neutral"
-      shadow-intensity="1"
-      shadow-softness="0.6"
-    >
-    </model-viewer>
+    <div class="stage">
+      <model-viewer
+        src="logo.glb"
+        alt="Spinning 3D logo"
+        auto-rotate
+        auto-rotate-delay="0"
+        rotation-per-second="30deg"
+        interaction-prompt="none"
+        camera-orbit="0deg 85deg auto"
+        environment-image="neutral"
+        shadow-intensity="0"
+      >
+      </model-viewer>
+      <div class="shadow"></div>
+    </div>
     <script>
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         document.querySelector("model-viewer").removeAttribute("auto-rotate");
